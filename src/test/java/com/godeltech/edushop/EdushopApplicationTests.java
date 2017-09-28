@@ -1,4 +1,4 @@
-package dzmitry.com.example.edushop;
+package com.godeltech.edushop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package dzmitry.com.example.edushop;
+package com.godeltech.edushop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
