@@ -34,4 +34,7 @@ public class User {
     @Column(nullable = false)
     private Date registrationDate;
 
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    private List<Item> items;
+
 }

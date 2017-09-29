@@ -1,11 +1,18 @@
 package com.godeltech.edushop.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
  * Created by d.ihnatovich on 9/28/2017.
  */
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -17,4 +24,9 @@ public class Role {
     private String name;
     @Column(nullable = false)
     private String description;
+
+    public Role(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
