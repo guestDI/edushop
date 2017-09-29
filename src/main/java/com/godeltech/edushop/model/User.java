@@ -1,5 +1,7 @@
 package com.godeltech.edushop.model;
 
+import javassist.bytecode.ByteArray;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,7 @@ public class User {
     private boolean active;
     @Column(nullable = false)
     private Date registrationDate;
+    private ByteArray profilePhoto;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Item> items;

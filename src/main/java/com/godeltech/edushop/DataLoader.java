@@ -18,13 +18,15 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        Role adminRole = new Role("admin", "Master");
-        Role sellerRole = new Role("seller", "Master");
-        Role buyerRole = new Role("buyer", "Master");
+        Role adminRole = new Role("admin", "Master and God");
+        Role sellerRole = new Role("seller", "Seller");
+        Role buyerRole = new Role("buyer", "Buyer");
+        Role premiumBuyerRole = new Role("premium_buyer", "Buyer that have possibility to see list of discount items");
 
         roleRepository.save(adminRole);
         roleRepository.save(sellerRole);
         roleRepository.save(buyerRole);
+        roleRepository.save(premiumBuyerRole);
 
     }
 
