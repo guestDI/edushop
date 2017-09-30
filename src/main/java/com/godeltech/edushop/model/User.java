@@ -1,12 +1,17 @@
 package com.godeltech.edushop.model;
 
 import javassist.bytecode.ByteArray;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -34,10 +39,18 @@ public class User {
     @Column(nullable = false)
     private boolean active;
     @Column(nullable = false)
-    private Date registrationDate;
-    private ByteArray profilePhoto;
+    private Date registrationDate = new Date();
+    private Byte profilePhoto;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Item> items;
 
+    public User(String username, String password, String firstname, String lastname, String email, boolean active) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.active = active;
+    }
 }
