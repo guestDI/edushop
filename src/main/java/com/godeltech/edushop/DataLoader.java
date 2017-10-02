@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
+import javax.jws.soap.SOAPBinding;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by d.ihnatovich on 9/29/2017.
  */
 @Component
+@Transactional(propagation = Propagation.REQUIRED)
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -31,15 +33,20 @@ public class DataLoader implements ApplicationRunner {
         Role buyerRole = new Role("buyer", "Buyer");
         Role premiumBuyerRole = new Role("premium_buyer", "Buyer that have possibility to see list of discount items");
 
-        User admin = new User("administrator", "1234567", "", "", "ignatovich.dm@gmail.com", true);
-
         roleRepository.save(adminRole);
         roleRepository.save(sellerRole);
         roleRepository.save(buyerRole);
         roleRepository.save(premiumBuyerRole);
 
-        userRepository.save(admin);
+        User adminUser = User.builder()
+                .username("administrator")
+                .password("administrator")
+                .email("ignatovich.dm@gmail.com")
+                .roles(Arrays.asList(adminRole))
+                .active(true)
+                .build();
 
+        userRepository.save(adminUser);
     }
 
 }
