@@ -46,7 +46,25 @@ public class DataLoader implements ApplicationRunner {
                 .active(true)
                 .build();
 
+        User buyerUser = User.builder()
+                .username("buyer")
+                .password("buyer")
+                .email("test.dm@gmail.com")
+                .roles(Arrays.asList(buyerRole))
+                .active(true)
+                .build();
+
+        User sellerUser = User.builder()
+                .username("seller")
+                .password("seller")
+                .email("test1.dm@gmail.com")
+                .roles(Arrays.asList(sellerRole))
+                .active(true)
+                .build();
+
         userRepository.save(adminUser);
+        userRepository.save(buyerUser);
+        userRepository.save(sellerUser);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.godeltech.edushop.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javassist.bytecode.ByteArray;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Builder
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +46,7 @@ public class User {
     private byte[] profilePhoto;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Item> items;
 
     @PrePersist

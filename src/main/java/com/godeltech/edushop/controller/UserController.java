@@ -1,7 +1,42 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.model.User;
+import com.godeltech.edushop.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * Created by Dmitry on 30.09.2017.
  */
+
+@CrossOrigin
+@RestController
+@RequestMapping(value = "api/v1/users")
 public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<User> findAll() {
+
+        return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/getNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<User> findAllNotAdmin() {
+
+        return userRepository.findExceptAdmin();
+    }
+
+    @RequestMapping(value = "/getUsersInfo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<User> findUsers() {
+
+        return userRepository.findUsers();
+    }
+
 }
