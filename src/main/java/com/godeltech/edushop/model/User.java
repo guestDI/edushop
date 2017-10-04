@@ -32,12 +32,12 @@ public class User{
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "user_id", nullable = false) },
             inverseJoinColumns = { @JoinColumn(name = "role_id",
                     nullable = false, updatable = false) })
-    private List<Role> roles;
+    private Role role;
     @Column(nullable = false)
     private boolean active;
     @Column(nullable = false)
@@ -52,5 +52,6 @@ public class User{
     @PrePersist
     public void prePersist() {
         this.registrationDate = new Date();
+        this.active = true;
     }
 }

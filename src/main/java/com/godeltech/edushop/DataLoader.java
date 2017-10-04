@@ -28,10 +28,10 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        Role adminRole = new Role("admin", "Master and God");
-        Role sellerRole = new Role("seller", "Seller");
-        Role buyerRole = new Role("buyer", "Buyer");
-        Role premiumBuyerRole = new Role("premium_buyer", "Buyer that have possibility to see list of discount items");
+        Role adminRole = new Role("Administrator", "Master and God");
+        Role sellerRole = new Role("Seller", "Seller");
+        Role buyerRole = new Role("Buyer", "Buyer");
+        Role premiumBuyerRole = new Role("Premium_Buyer", "Buyer that have possibility to see list of discount items");
 
         roleRepository.save(adminRole);
         roleRepository.save(sellerRole);
@@ -42,7 +42,7 @@ public class DataLoader implements ApplicationRunner {
                 .username("administrator")
                 .password("administrator")
                 .email("ignatovich.dm@gmail.com")
-                .roles(Arrays.asList(adminRole))
+                .role(adminRole)
                 .active(true)
                 .build();
 
@@ -50,7 +50,7 @@ public class DataLoader implements ApplicationRunner {
                 .username("buyer")
                 .password("buyer")
                 .email("test.dm@gmail.com")
-                .roles(Arrays.asList(buyerRole))
+                .role(buyerRole)
                 .active(true)
                 .build();
 
@@ -58,7 +58,7 @@ public class DataLoader implements ApplicationRunner {
                 .username("seller")
                 .password("seller")
                 .email("test1.dm@gmail.com")
-                .roles(Arrays.asList(sellerRole))
+                .role(sellerRole)
                 .active(true)
                 .build();
 

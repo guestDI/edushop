@@ -1,13 +1,14 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Dmitry on 30.09.2017.
@@ -37,6 +38,29 @@ public class UserController {
     public Iterable<User> findUsers() {
 
         return userRepository.findUsers();
+    }
+
+//    @RequestMapping(value = "/addUser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public User addUser(@RequestBody User user) {
+//
+//        Role role =
+//
+//
+//        User newUser = User.builder()
+//                .username(user.getUsername())
+//                .password(user.getPassword())
+//                .email(user.getEmail())
+//                .role(user.getRole())
+//                .build();
+//
+//        return userRepository.save(newUser);
+//
+//    }
+
+    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteUser(@PathVariable("id") Long id) {
+
+        userRepository.delete(id);
     }
 
 }
