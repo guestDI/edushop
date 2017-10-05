@@ -16,10 +16,10 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    @Query("Select u from User u join u.roles roles where roles.id != 1")
+    @Query("Select u from User u where u.role.id != 1")
     public List<User> findExceptAdmin();
 
-    @Query("Select u.id, u.username, u.email, roles, u.active from User u join u.roles roles where roles.id != 1")
+    @Query("Select u.id, u.username, u.email, u.role, u.active from User u where u.role.id != 1")
     public List<User> findUsers();
 
 }

@@ -31,12 +31,8 @@ public class User{
     private String lastname;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = {
-            @JoinColumn(name = "user_id", nullable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "role_id",
-                    nullable = false, updatable = false) })
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="role_id")
     private Role role;
     @Column(nullable = false)
     private boolean active;
