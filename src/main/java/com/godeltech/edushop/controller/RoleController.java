@@ -26,4 +26,10 @@ public class RoleController {
 
         return roleRepository.findAll();
     }
+
+    @RequestMapping(value = "/getNewUserRoles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Role> findNewUserRoles() {
+
+        return roleRepository.findRolesForNewUsers();
+    }
 }
