@@ -40,10 +40,10 @@ public class UserController {
         return userRepository.findExceptAdmin();
     }
 
-    @RequestMapping(value = "/getUsersInfo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<User> findUsers() {
+    @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUserInfo(@PathVariable("id") Long id) {
 
-        return userRepository.findUsers();
+        return userRepository.findOne(id);
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

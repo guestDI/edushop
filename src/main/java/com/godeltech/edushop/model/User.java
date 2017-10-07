@@ -31,7 +31,7 @@ public class User{
     private String lastname;
     @Column(nullable = false)
     private String email;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name="role_id")
     private Role role;
     @Column(nullable = false)

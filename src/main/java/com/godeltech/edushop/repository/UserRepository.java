@@ -19,7 +19,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("Select u from User u where u.role.id != 1")
     public List<User> findExceptAdmin();
 
-    @Query("Select u.id, u.username, u.email, u.role, u.active from User u where u.role.id != 1")
-    public List<User> findUsers();
-
 }
