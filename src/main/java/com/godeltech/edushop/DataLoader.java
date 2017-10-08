@@ -1,7 +1,9 @@
 package com.godeltech.edushop;
 
+import com.godeltech.edushop.model.Item;
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
+import com.godeltech.edushop.repository.ItemRepository;
 import com.godeltech.edushop.repository.RoleRepository;
 import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private ItemRepository itemRepository;
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         Role adminRole = new Role("Administrator", "Master and God");
@@ -65,6 +68,18 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(adminUser);
         userRepository.save(buyerUser);
         userRepository.save(sellerUser);
+
+        Item item = Item.builder()
+                .supplier(buyerUser)
+                .category("Category")
+                .manufacturer("Manufacturer")
+                .name("Name")
+                .description("Description")
+                .quantity(2)
+                .price(2.2)
+                .build();
+
+        itemRepository.save(item);
     }
 
 }

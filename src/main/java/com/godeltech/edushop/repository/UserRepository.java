@@ -4,6 +4,7 @@ import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 

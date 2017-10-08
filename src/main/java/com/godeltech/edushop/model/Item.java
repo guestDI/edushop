@@ -1,8 +1,6 @@
 package com.godeltech.edushop.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,8 +10,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "items")
+@Builder
 public class Item {
 
     @Id
@@ -23,5 +23,25 @@ public class Item {
     @ManyToOne
     @JoinColumn(name="supplier_id")
     private User supplier;
+
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private String manufacturer;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private int quantity;
+
+    @Column(nullable = false)
+    private double price;
+
+    private double discount;
 
 }
