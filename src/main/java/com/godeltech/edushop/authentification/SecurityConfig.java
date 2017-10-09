@@ -1,3 +1,9 @@
+import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 //package com.godeltech.edushop.Authentification;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +27,9 @@
 // * Created by Dmitry on 04.10.2017.
 // */
 //@Configuration
-//@EnableWebSecurity
 //public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//
+//    private Map<Long, String> users = new HashMap<>();
 //
 ////    protected void configure(AuthenticationManagerBuilder auth)
 ////            throws Exception {
@@ -30,11 +37,14 @@
 ////                .roles("admin");
 ////    }
 ////
-////    protected void configure(HttpSecurity http) throws Exception {
-////        http.httpBasic().and().authorizeRequests().antMatchers("/getAll")
-////                .hasRole("admin").and()
-////                .csrf().disable().headers().frameOptions().disable();
-////    }
+//    protected void configure(HttpSecurity http) throws Exception {
+//        String tokenFromRequest = http.getHeader().get("token");
+//        Long id = http.getHeader().get("id");
+//        String token = users.get(id);
+//        if (StringUtils.isEmpty(tokenFromRequest) || !tokenFromRequest.equals(token)) {
+////            exception
+//        }
+//    }
 //
 //    @Autowired
 //    @Qualifier("customUserDetailsService")

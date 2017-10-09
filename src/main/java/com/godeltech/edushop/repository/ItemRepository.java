@@ -15,6 +15,4 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
 
-    @Query("Select i.id, i.category, i.manufacturer, i.name from Item i where i.supplier.id = 2")
-    public List<Item> findItemsForUser();
 }

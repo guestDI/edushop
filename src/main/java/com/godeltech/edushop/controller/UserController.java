@@ -1,16 +1,19 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.converter.UserConverter;
+import com.godeltech.edushop.dto.UserDTO;
+import com.godeltech.edushop.dto.UserProfileDTO;
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.RoleRepository;
 import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +32,9 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserConverter userConverter;
+
     @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<User> findAll() {
 
@@ -36,15 +42,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<User> findAllNotAdmin() {
+    public ResponseEntity<List<UserDTO>> findAllNotAdmin() {
 
-        return userRepository.findExceptAdmin();
+        return new ResponseEntity<>(userConverter.convertUser(userRepository.findExceptAdmin()), HttpStatus.FOUND);
     }
 
     @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUserInfo(@PathVariable("id") Long id) {
+    public ResponseEntity<UserProfileDTO> getUserInfo(@PathVariable("id") Long id) {
 
-        return userRepository.findOne(id);
+        return new ResponseEntity<>(userConverter.convertUserInfo(userRepository.findOne(id)), HttpStatus.FOUND);
+
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

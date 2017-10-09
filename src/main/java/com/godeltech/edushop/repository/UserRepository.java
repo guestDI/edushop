@@ -18,6 +18,6 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("Select u from User u where u.role.id != 1")
-    public List<User> findExceptAdmin();
+    List<User> findExceptAdmin();
 
 }

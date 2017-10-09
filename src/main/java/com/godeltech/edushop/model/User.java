@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "\"user\"")
 @Builder
 public class User{
 
@@ -49,5 +49,10 @@ public class User{
     public void prePersist() {
         this.registrationDate = new Date();
         this.active = true;
+    }
+
+    public User(String username, String lastname) {
+        this.username = username;
+        this.lastname = lastname;
     }
 }

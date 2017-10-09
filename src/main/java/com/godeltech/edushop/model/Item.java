@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "items")
+@Table(name = "item")
 @Builder
 public class Item {
 
@@ -42,6 +42,7 @@ public class Item {
     @Column(nullable = false)
     private double price;
 
+    @Column
     private double discount;
 
 }

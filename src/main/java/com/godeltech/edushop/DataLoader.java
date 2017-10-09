@@ -79,7 +79,18 @@ public class DataLoader implements ApplicationRunner {
                 .price(2.2)
                 .build();
 
+        Item item1 = Item.builder()
+                .supplier(buyerUser)
+                .category("Category1")
+                .manufacturer("Manufacturer1")
+                .name("Name1")
+                .description("Description1")
+                .quantity(2)
+                .price(2.2)
+                .build();
+
         itemRepository.save(item);
+        itemRepository.save(item1);
     }
 
 }
