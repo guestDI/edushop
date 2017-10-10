@@ -23,7 +23,7 @@ public class UserConverter {
     }
 
     public UserProfileDTO convertUserInfo(User user) {
-        return new UserProfileDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole(), user.getProfilePhoto());
+        return new UserProfileDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole().getName(), user.getProfilePhoto());
 
     }
 }
