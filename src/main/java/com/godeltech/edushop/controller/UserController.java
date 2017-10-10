@@ -44,13 +44,13 @@ public class UserController {
     @RequestMapping(value = "/getNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> findAllNotAdmin() {
 
-        return new ResponseEntity<>(userConverter.convertUser(userRepository.findExceptAdmin()), HttpStatus.FOUND);
+        return new ResponseEntity<>(userConverter.convertUser(userRepository.findExceptAdmin()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfileDTO> getUserInfo(@PathVariable("id") Long id) {
 
-        return new ResponseEntity<>(userConverter.convertUserInfo(userRepository.findOne(id)), HttpStatus.FOUND);
+        return new ResponseEntity<>(userConverter.convertUserInfo(userRepository.findOne(id)), HttpStatus.OK);
 
     }
 
