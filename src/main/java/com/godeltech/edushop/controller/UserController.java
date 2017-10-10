@@ -1,5 +1,6 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.assembler.UserProfileAssembler;
 import com.godeltech.edushop.converter.UserConverter;
 import com.godeltech.edushop.dto.UserDTO;
 import com.godeltech.edushop.dto.UserProfileDTO;
@@ -35,6 +36,9 @@ public class UserController {
     @Autowired
     private UserConverter userConverter;
 
+    @Autowired
+    private UserProfileAssembler userProfileAssembler;
+
     @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<User> findAll() {
 
@@ -68,6 +72,14 @@ public class UserController {
 
         return userRepository.save(newUser);
 
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserProfileDTO updateUser(@RequestBody UserProfileDTO userProfileDto) {
+//        User user = userRepository.findOne(userProfileDto.getId());
+//        return userRepository.save(userProfileAssembler.assemble(user, userProfileDto));
+        userRepository.update(userProfileDto);
+        return userProfileDto;
     }
 
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
