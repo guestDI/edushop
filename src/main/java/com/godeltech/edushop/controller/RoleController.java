@@ -2,6 +2,7 @@ package com.godeltech.edushop.controller;
 
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.repository.RoleRepository;
+import com.godeltech.edushop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,17 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Role> findAll() {
-
-        return roleRepository.findAll();
+        return roleService.getAll();
     }
 
     @RequestMapping(value = "/getNewUserRoles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Role> findNewUserRoles() {
-
-        return roleRepository.findRolesForNewUsers();
+        return roleService.getRoleExceptAdmin();
     }
 }
