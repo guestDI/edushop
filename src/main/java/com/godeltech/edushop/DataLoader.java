@@ -1,8 +1,10 @@
 package com.godeltech.edushop;
 
+import com.godeltech.edushop.model.Category;
 import com.godeltech.edushop.model.Item;
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
+import com.godeltech.edushop.repository.CategoryRepository;
 import com.godeltech.edushop.repository.ItemRepository;
 import com.godeltech.edushop.repository.RoleRepository;
 import com.godeltech.edushop.repository.UserRepository;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 /**
@@ -29,6 +32,9 @@ public class DataLoader implements ApplicationRunner {
     private UserRepository userRepository;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         Role adminRole = new Role("Administrator", "Master and God");
@@ -69,28 +75,49 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(buyerUser);
         userRepository.save(sellerUser);
 
+        Category electronicDevice = new Category("Mobile Phones", null);
+        Category clothes = new Category("Pants", null);
+        Category auto = new Category("Car", null);
+        Category food = new Category("Butter", null);
+
+        categoryRepository.save(electronicDevice);
+        categoryRepository.save(clothes);
+        categoryRepository.save(auto);
+        categoryRepository.save(food);
+
         Item item = Item.builder()
                 .supplier(buyerUser)
-                .category("Category")
-                .manufacturer("Manufacturer")
-                .name("Name")
-                .description("Description")
+                .category(electronicDevice)
+                .manufacturer("Samsung")
+                .name("S8")
+                .description("Phone for rich guys")
                 .quantity(2)
-                .price(2.2)
+                .price(new BigDecimal("1000"))
                 .build();
 
         Item item1 = Item.builder()
                 .supplier(buyerUser)
-                .category("Category1")
+                .category(auto)
+                .manufacturer("BMW")
+                .name("X5")
+                .description("Car for rich guys")
+                .quantity(10)
+                .price(new BigDecimal("60000.1"))
+                .build();
+
+        Item item2 = Item.builder()
+                .supplier(buyerUser)
+                .category(food)
                 .manufacturer("Manufacturer1")
-                .name("Name1")
-                .description("Description1")
-                .quantity(2)
-                .price(2.2)
+                .name("Rama")
+                .description("Good butter")
+                .quantity(5)
+                .price(new BigDecimal("2.1"))
                 .build();
 
         itemRepository.save(item);
         itemRepository.save(item1);
+        itemRepository.save(item2);
     }
 
 }

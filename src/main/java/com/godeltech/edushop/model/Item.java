@@ -3,6 +3,7 @@ package com.godeltech.edushop.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by d.ihnatovich on 9/29/2017.
@@ -24,8 +25,9 @@ public class Item {
     @JoinColumn(name="supplier_id")
     private User supplier;
 
-    @Column(nullable = false)
-    private String category;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
 
     @Column(nullable = false)
     private String manufacturer;
@@ -40,9 +42,9 @@ public class Item {
     private int quantity;
 
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column
-    private double discount;
+    private int discount;
 
 }

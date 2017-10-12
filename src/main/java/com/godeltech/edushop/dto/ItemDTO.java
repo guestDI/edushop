@@ -1,8 +1,11 @@
 package com.godeltech.edushop.dto;
 
+import com.godeltech.edushop.model.Category;
 import com.godeltech.edushop.model.Role;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,11 +18,11 @@ import java.util.Date;
 @Builder
 public class ItemDTO {
     private Long id;
-    private String category;
+    private Category category;
     private String manufacturer;
     private String name;
     private String description;
-    private double quantity;
-    private double price;
-    private double discount;
+    private int quantity;
+    private BigDecimal price;
+    private int discount;
 }
