@@ -16,8 +16,8 @@ import java.util.List;
  */
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
-    @Query("SELECT i FROM Item i WHERE (:#{#filter.manufacturer} IS NULL OR i.manufacturer = :#{#filter.manufacturer}) " +
-            "AND (:#{#filter.description} IS NULL OR i.description LIKE CONCAT('%',:#{#filter.description},'%')) " +
+    @Query("SELECT i FROM Item i WHERE ( :#{#filter.manufacturer} IS NULL OR i.manufacturer = :#{#filter.manufacturer}) " +
+            "AND (:#{#filter.description} IS NULL OR i.description LIKE :#{#filter.description}) " +
             "AND (:#{#filter.minPrice} IS NULL OR i.price >= :#{#filter.minPrice}) " +
             "AND (:#{#filter.maxPrice} IS NULL OR i.price <= :#{#filter.maxPrice}) " +
             "AND (:#{#filter.discount} IS NULL OR i.discount > 0) " +

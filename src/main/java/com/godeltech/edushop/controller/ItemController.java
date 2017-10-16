@@ -4,6 +4,7 @@ import com.godeltech.edushop.converter.ItemConverter;
 import com.godeltech.edushop.dto.ItemFilter;
 import com.godeltech.edushop.dto.ItemDTO;
 import com.godeltech.edushop.repository.ItemRepository;
+import com.godeltech.edushop.service.ItemService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,9 @@ public class ItemController {
     @Autowired
     private ItemConverter itemConverter;
 
+    @Autowired
+    private ItemService itemService;
+
 //    @RequestMapping(value = "/getAllBySupplier", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<List<Item>> findAllBySupplier() {
 //        return new ResponseEntity<>(itemRepository.findItemsForUser(), HttpStatus.FOUND);
@@ -37,14 +41,14 @@ public class ItemController {
     @RequestMapping(value = "/getAllBySupplier/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> findAllBySupplier(@PathVariable("id") Long id) {
 
-        return new ResponseEntity<>(itemConverter.convertItem(Lists.newArrayList(itemRepository.findAll(Collections.singleton(id)))), HttpStatus.FOUND);
+        return new ResponseEntity<>(itemConverter.convertItem(Lists.newArrayList(itemRepository.findAll(Collections.singleton(id)))), HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/filterItems", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> filterItems(@RequestBody ItemFilter itemFilter) {
 
-        return new ResponseEntity<>(itemConverter.convertItem(Lists.newArrayList(itemRepository.findItemsByFilter(itemFilter))), HttpStatus.FOUND);
+        return new ResponseEntity<>(itemService.getItemsByFilter(itemFilter), HttpStatus.OK);
 
     }
 }

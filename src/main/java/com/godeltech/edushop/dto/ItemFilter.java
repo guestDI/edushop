@@ -2,6 +2,7 @@ package com.godeltech.edushop.dto;
 
 import com.godeltech.edushop.model.Category;
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
@@ -20,4 +21,9 @@ public class ItemFilter {
     private BigDecimal maxPrice;
     private Boolean discount;
     private Long categoryId;
+
+    public String getDescription() {
+        String temp = StringUtils.isEmpty(this.description) ? null : "%" + description + "%";
+        return temp;
+    }
 }
