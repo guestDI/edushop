@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 public class ItemFilter {
     private String manufacturer;
     private String description;
+    private String name;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Boolean discount;

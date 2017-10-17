@@ -115,9 +115,21 @@ public class DataLoader implements ApplicationRunner {
                 .price(new BigDecimal("2.1"))
                 .build();
 
+        Item item3 = Item.builder()
+                .supplier(buyerUser)
+                .category(auto)
+                .manufacturer("Opel")
+                .name("Astra")
+                .description("Car for not very rich guys")
+                .quantity(5)
+                .price(new BigDecimal("20000.1"))
+                .discount(10)
+                .build();
+
         itemRepository.save(item);
         itemRepository.save(item1);
         itemRepository.save(item2);
+        itemRepository.save(item3);
     }
 
 }
