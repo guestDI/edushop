@@ -3,6 +3,7 @@ package com.godeltech.edushop.controller;
 import com.godeltech.edushop.converter.ItemConverter;
 import com.godeltech.edushop.dto.ItemFilter;
 import com.godeltech.edushop.dto.ItemDTO;
+import com.godeltech.edushop.dto.ItemSupplierDto;
 import com.godeltech.edushop.repository.ItemRepository;
 import com.godeltech.edushop.service.ItemService;
 import com.google.common.collect.Lists;
@@ -49,6 +50,12 @@ public class ItemController {
     public ResponseEntity<List<ItemDTO>> filterItems(@RequestBody ItemFilter itemFilter) {
 
         return new ResponseEntity<>(itemService.getItemsByFilter(itemFilter), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/filterItemsBySupplier/{id}/{page}/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ItemDTO>> filterItemsForPage(@PathVariable("id") Long id, @PathVariable("page") Integer page, @PathVariable("count") Integer count) {
+        return new ResponseEntity<>(itemService.getItemsForPage(new ItemSupplierDto(id, page, count)), HttpStatus.OK);
 
     }
 }

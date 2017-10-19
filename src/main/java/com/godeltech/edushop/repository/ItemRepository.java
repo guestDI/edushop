@@ -35,6 +35,8 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             "AND (:#{#filter.categoryId} IS NULL OR i.category.id = :#{#filter.categoryId}) ")
     List<Item> findItemsByFilter(@Param("filter") ItemFilter itemFilter);
 
+
+
 //    @Query("SELECT i FROM Item i WHERE ( :#{#filter.manufacturer} IS NULL OR i.manufacturer = :#{#filter.manufacturer}) " +
 //            "AND (:description IS NULL OR i.description LIKE '%':description) " +
 //            "AND (:#{#filter.name} IS NULL OR i.name LIKE :#{#filter.name}) " +
