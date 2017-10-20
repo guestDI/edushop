@@ -36,6 +36,8 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     List<Item> findItemsByFilter(@Param("filter") ItemFilter itemFilter);
 
 
+    @Query("SELECT count(*) from Item i where i.supplier.id = :id")
+    Long getItemsCount(@Param("id") Long supplierId);
 
 //    @Query("SELECT i FROM Item i WHERE ( :#{#filter.manufacturer} IS NULL OR i.manufacturer = :#{#filter.manufacturer}) " +
 //            "AND (:description IS NULL OR i.description LIKE '%':description) " +

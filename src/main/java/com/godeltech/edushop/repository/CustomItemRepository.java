@@ -28,4 +28,5 @@ public class CustomItemRepository {
 
         return query.getResultList();
     }
+
 }
