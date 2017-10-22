@@ -26,4 +26,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("UPDATE User u SET u.firstname = :#{#dto.firstname}, u.lastname = :#{#dto.lastname}, u.email = :#{#dto.email}" +
             " WHERE u.id = :#{#dto.id}")
     int update(@Param("dto") UserProfileDTO dto);
+
+    @Modifying(clearAutomatically = true)
+    @Query("Update User u SET u.active = :status WHERE u.id = :id")
+    Integer updateUserStatus(@Param("id") Long userId, @Param("status") boolean status);
+
 }

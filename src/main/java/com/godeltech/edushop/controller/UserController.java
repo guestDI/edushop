@@ -54,6 +54,11 @@ public class UserController {
         return userProfileDto;
     }
 
+    @RequestMapping(value = "/updateUserStatus/{id}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Integer updateUserStatus(@PathVariable("id") Long id, @PathVariable("status") boolean status){
+        return  userService.updateUserStatus(id, status);
+    }
+
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteUser(@PathVariable("id") Long id) {
 

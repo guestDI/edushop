@@ -48,9 +48,12 @@ public class ItemController {
 
     @RequestMapping(value = "/filterItems", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> filterItems(@RequestBody ItemFilter itemFilter) {
-
         return new ResponseEntity<>(itemService.getItemsByFilter(itemFilter), HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "/getItemsCountByFilter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getItemsCountSearch(@RequestBody ItemFilter itemFilter) {
+        return itemService.getItemsCountByFilter(itemFilter);
     }
 
     @RequestMapping(value = "/filterItemsBySupplier/{id}/{page}/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,4 +67,5 @@ public class ItemController {
         return itemService.getItemsCount(id);
 
     }
+
 }

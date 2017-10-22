@@ -22,6 +22,10 @@ public class UserConverter {
                 .collect(Collectors.toList());
     }
 
+    public UserDTO convertUser(User user) {
+        return new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getRole(), user.isActive(), user.getRegistrationDate());
+    }
+
     public UserProfileDTO convertUserInfo(User user) {
         return new UserProfileDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole().getName(), user.getProfilePhoto());
 

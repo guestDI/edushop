@@ -52,6 +52,10 @@ public class UserService {
         return userConverter.convertUser(userRepository.findExceptAdmin());
     }
 
+    public Integer updateUserStatus(Long id, boolean status){
+        return userRepository.updateUserStatus(id, status);
+    }
+
     public UserProfileDTO getUserProfile(Long id){
         return userConverter.convertUserInfo(userRepository.findOne(id));
     }

@@ -31,6 +31,10 @@ public class ItemService {
         return itemConverter.convertItem(itemRepository.findItemsByFilter(itemFilter));
     }
 
+    public Long getItemsCountByFilter(ItemFilter itemFilter){
+        return itemRepository.findItemsCountByFilter(itemFilter);
+    }
+
     public List<ItemDTO> getItemsForPage(ItemSupplierDto itemSupplierDto){
         return itemConverter.convertItem(customItemRepository.findItemsForPage(itemSupplierDto));
     }
