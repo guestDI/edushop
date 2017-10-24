@@ -3,10 +3,12 @@ package com.godeltech.edushop.service;
 import com.godeltech.edushop.converter.ItemConverter;
 import com.godeltech.edushop.dto.ItemDTO;
 import com.godeltech.edushop.dto.ItemFilter;
+import com.godeltech.edushop.dto.ItemFilterWithPaging;
 import com.godeltech.edushop.dto.ItemSupplierDto;
 import com.godeltech.edushop.repository.CustomItemRepository;
 import com.godeltech.edushop.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,11 @@ public class ItemService {
 
     public Long getItemsCountByFilter(ItemFilter itemFilter){
         return itemRepository.findItemsCountByFilter(itemFilter);
+    }
+
+    public List<ItemDTO> getItemsByFilterForPage(ItemFilterWithPaging itemFilterWithPaging){
+        PageRequest pageRequest = new PageRequest(itemFilterWithPaging.getPage(), itemFilterWithPaging.getSize());
+        return itemConverter.convertItem(itemRepository.findItemsByFilterAndPage(itemFilterWithPaging.getItemFilter(), pageRequest));
     }
 
     public List<ItemDTO> getItemsForPage(ItemSupplierDto itemSupplierDto){

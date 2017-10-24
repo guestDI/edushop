@@ -18,12 +18,21 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
     @Column(nullable = false)
     private String name;
     @Column
     private String description;
 
     public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Category(Category parentCategory, String name, String description) {
+        this.parentCategory = parentCategory;
         this.name = name;
         this.description = description;
     }

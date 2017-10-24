@@ -79,11 +79,13 @@ public class DataLoader implements ApplicationRunner {
         Category clothes = new Category("Pants", null);
         Category auto = new Category("Car", null);
         Category food = new Category("Butter", null);
+        Category bently = new Category(auto, "Butter", null);
 
         categoryRepository.save(electronicDevice);
         categoryRepository.save(clothes);
         categoryRepository.save(auto);
         categoryRepository.save(food);
+        categoryRepository.save(bently);
 
         Item item = Item.builder()
                 .supplier(buyerUser)
