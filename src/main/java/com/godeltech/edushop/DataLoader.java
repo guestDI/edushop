@@ -37,20 +37,22 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        Role adminRole = new Role("Administrator", "Master and God");
-        Role sellerRole = new Role("Seller", "Seller");
-        Role buyerRole = new Role("Buyer", "Buyer");
-        Role premiumBuyerRole = new Role("Premium_Buyer", "Buyer that have possibility to see list of discount items");
+        //Save roles
+        Role adminRole = new Role("Administrator", "Master and God of this application");
+        Role sellerRole = new Role("Seller", "Seller can sell goods");
+        Role buyerRole = new Role("Buyer", "Buyer can buy goods");
+        Role premiumBuyerRole = new Role("Premium_Buyer", "Buyer that have possibility to see additional discounts");
 
         roleRepository.save(adminRole);
         roleRepository.save(sellerRole);
         roleRepository.save(buyerRole);
         roleRepository.save(premiumBuyerRole);
 
+        //Save users
         User adminUser = User.builder()
                 .username("administrator")
                 .password("administrator")
-                .email("ignatovich.dm@gmail.com")
+                .email("admin@gmail.com")
                 .role(adminRole)
                 .active(true)
                 .build();
@@ -58,7 +60,7 @@ public class DataLoader implements ApplicationRunner {
         User buyerUser = User.builder()
                 .username("buyer")
                 .password("buyer")
-                .email("test.dm@gmail.com")
+                .email("buyer@gmail.com")
                 .role(buyerRole)
                 .active(true)
                 .build();
@@ -66,30 +68,51 @@ public class DataLoader implements ApplicationRunner {
         User sellerUser = User.builder()
                 .username("seller")
                 .password("seller")
-                .email("test1.dm@gmail.com")
+                .email("seller@gmail.com")
                 .role(sellerRole)
                 .active(true)
+                .build();
+
+        User disabledSellerUser = User.builder()
+                .username("dis_seller")
+                .password("seller")
+                .email("dis_seller@gmail.com")
+                .role(sellerRole)
+                .active(false)
                 .build();
 
         userRepository.save(adminUser);
         userRepository.save(buyerUser);
         userRepository.save(sellerUser);
+        userRepository.save(disabledSellerUser);
 
-        Category electronicDevice = new Category("Mobile Phones", null);
-        Category clothes = new Category("Pants", null);
-        Category auto = new Category("Car", null);
-        Category food = new Category("Butter", null);
-        Category bently = new Category(auto, "Butter", null);
+        //Save parent categories
+        Category electronicDevice = new Category("Electronic", "Electronic devices");
+        Category clothes = new Category("Clothes", null);
+        Category auto = new Category("Auto", null);
 
         categoryRepository.save(electronicDevice);
         categoryRepository.save(clothes);
         categoryRepository.save(auto);
-        categoryRepository.save(food);
-        categoryRepository.save(bently);
 
+        //Save child categories
+        Category phone = new Category(electronicDevice, "Mobile phones", null);
+        Category tv = new Category(electronicDevice, "TVs", null);
+        Category console = new Category(electronicDevice, "Game Consoles", "Game consoles, accessories and games");
+
+        Category car = new Category(auto, "Cars", null);
+        Category tires = new Category(auto, "Tires", null);
+
+        categoryRepository.save(phone);
+        categoryRepository.save(tv);
+        categoryRepository.save(console);
+        categoryRepository.save(car);
+        categoryRepository.save(tires);
+
+        //Save items
         Item item = Item.builder()
-                .supplier(buyerUser)
-                .category(electronicDevice)
+                .supplier(sellerUser)
+                .category(phone)
                 .manufacturer("Samsung")
                 .name("S8")
                 .description("Phone for rich guys")
@@ -98,8 +121,8 @@ public class DataLoader implements ApplicationRunner {
                 .build();
 
         Item item1 = Item.builder()
-                .supplier(buyerUser)
-                .category(auto)
+                .supplier(sellerUser)
+                .category(car)
                 .manufacturer("BMW")
                 .name("X5")
                 .description("Car for rich guys")
@@ -108,18 +131,18 @@ public class DataLoader implements ApplicationRunner {
                 .build();
 
         Item item2 = Item.builder()
-                .supplier(buyerUser)
-                .category(food)
-                .manufacturer("Manufacturer1")
-                .name("Rama")
-                .description("Good butter")
-                .quantity(5)
-                .price(new BigDecimal("2.1"))
+                .supplier(sellerUser)
+                .category(tv)
+                .manufacturer("Samsung")
+                .name("QN65Q9FAMFXZA")
+                .description("\"65\" Class Q9F QLED 4K TV")
+                .quantity(10)
+                .price(new BigDecimal("3300.1"))
                 .build();
 
         Item item3 = Item.builder()
-                .supplier(buyerUser)
-                .category(auto)
+                .supplier(sellerUser)
+                .category(car)
                 .manufacturer("Opel")
                 .name("Astra")
                 .description("Car for not very rich guys")
