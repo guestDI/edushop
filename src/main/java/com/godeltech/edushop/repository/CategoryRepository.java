@@ -2,7 +2,9 @@ package com.godeltech.edushop.repository;
 
 import com.godeltech.edushop.model.Category;
 import com.godeltech.edushop.model.Item;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -14,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CategoryService {
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     public Iterable<Category> getAll(){
         return categoryRepository.findAll();
     }
+
 }

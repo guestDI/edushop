@@ -16,8 +16,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     private Map<Long, String> users = new HashMap<>();
 
+    public void register(Long id, String token){
+        users.put(id, token);
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+
         return super.preHandle(request, response, handler);
     }
+
 }

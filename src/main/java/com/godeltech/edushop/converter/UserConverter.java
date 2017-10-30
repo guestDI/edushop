@@ -1,8 +1,10 @@
 package com.godeltech.edushop.converter;
 
 import com.godeltech.edushop.dto.UserDTO;
+import com.godeltech.edushop.dto.UserLoginDTO;
 import com.godeltech.edushop.dto.UserProfileDTO;
 import com.godeltech.edushop.model.User;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
@@ -28,6 +30,12 @@ public class UserConverter {
 
     public UserProfileDTO convertUserInfo(User user) {
         return new UserProfileDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole().getName(), user.getProfilePhoto());
+
+    }
+
+    public UserLoginDTO convertUserLogin(User user) {
+        String token = RandomStringUtils.randomAlphanumeric(10);
+        return new UserLoginDTO(user.getId(), user.getUsername(), user.getRole().getId(), user.isActive(), token);
 
     }
 }

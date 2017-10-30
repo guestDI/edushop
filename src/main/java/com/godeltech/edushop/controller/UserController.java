@@ -1,13 +1,17 @@
 package com.godeltech.edushop.controller;
 
 import com.godeltech.edushop.assembler.UserProfileAssembler;
+import com.godeltech.edushop.authentification.LoginInterceptor;
 import com.godeltech.edushop.converter.UserConverter;
+import com.godeltech.edushop.dto.LoginDTO;
 import com.godeltech.edushop.dto.UserDTO;
+import com.godeltech.edushop.dto.UserLoginDTO;
 import com.godeltech.edushop.dto.UserProfileDTO;
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.RoleRepository;
 import com.godeltech.edushop.service.UserService;
+import com.godeltech.edushop.validator.LoginUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,6 +32,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LoginUserValidator loginUserValidator;
+
+    @Autowired
+    private LoginInterceptor loginInterceptor;
 
     @RequestMapping(value = "/getNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> findAllNotAdmin() {
@@ -55,14 +65,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/updateUserStatus/{id}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Integer updateUserStatus(@PathVariable("id") Long id, @PathVariable("status") boolean status){
-        return  userService.updateUserStatus(id, status);
+    public Integer updateUserStatus(@PathVariable("id") Long id, @PathVariable("status") boolean status) {
+        return userService.updateUserStatus(id, status);
     }
 
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteUser(@PathVariable("id") Long id) {
 
         userService.deleteUser(id);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserLoginDTO loginUser(@RequestBody LoginDTO loginDTO) {
+        loginUserValidator.validate(loginDTO);
+        UserLoginDTO userLoginDTO = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
+        if (userLoginDTO == null) {
+            throw new RuntimeException("Not found");
+        }
+        loginInterceptor.register(userLoginDTO.getId(), userLoginDTO.getToken());
+
+        return userLoginDTO;
     }
 
 }

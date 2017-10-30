@@ -20,8 +20,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getAllCategories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Category> findAll() {
         return categoryService.getAll();
     }
+
 }

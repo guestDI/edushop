@@ -3,6 +3,7 @@ package com.godeltech.edushop.service;
 import com.godeltech.edushop.assembler.UserProfileAssembler;
 import com.godeltech.edushop.converter.UserConverter;
 import com.godeltech.edushop.dto.UserDTO;
+import com.godeltech.edushop.dto.UserLoginDTO;
 import com.godeltech.edushop.dto.UserProfileDTO;
 import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
@@ -16,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.plugin.util.UserProfile;
 
 import java.util.List;
+import java.util.Objects;
+
+import static java.util.Objects.nonNull;
 
 /**
  * Created by d.ihnatovich on 10/11/2017.
@@ -60,4 +64,13 @@ public class UserService {
         return userConverter.convertUserInfo(userRepository.findOne(id));
     }
 
+    public UserLoginDTO login(String username, String password) {
+        User user = userRepository.login(username, password);
+        UserLoginDTO userLoginDTO = null;
+        if (nonNull(user)) {
+            userLoginDTO = userConverter.convertUserLogin(user);
+        }
+
+        return  userLoginDTO;
+    }
 }
