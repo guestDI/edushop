@@ -22,6 +22,7 @@ public class ItemFilter {
     private BigDecimal maxPrice;
     private Boolean discount;
     private Long categoryId;
+    private Long childCategoryId;
 
     public String getDescription() {
         String temp = StringUtils.isEmpty(this.description) ? null : "%" + description + "%";

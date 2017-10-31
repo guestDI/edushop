@@ -39,6 +39,10 @@ public class ItemService {
 
     public List<ItemDTO> getItemsByFilterForPage(ItemFilterWithPaging itemFilterWithPaging){
         PageRequest pageRequest = new PageRequest(itemFilterWithPaging.getPage(), itemFilterWithPaging.getSize());
+        if(itemFilterWithPaging.getItemFilter().getChildCategoryId()!=null){
+            itemFilterWithPaging.getItemFilter().setCategoryId(itemFilterWithPaging.getItemFilter().getChildCategoryId());
+        }
+
         return itemConverter.convertItem(itemRepository.findItemsByFilterAndPage(itemFilterWithPaging.getItemFilter(), pageRequest));
     }
 
