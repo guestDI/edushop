@@ -5,8 +5,11 @@ import com.godeltech.edushop.dto.ItemDTO;
 import com.godeltech.edushop.dto.ItemFilter;
 import com.godeltech.edushop.dto.ItemFilterWithPaging;
 import com.godeltech.edushop.dto.ItemSupplierDto;
+import com.godeltech.edushop.model.Item;
+import com.godeltech.edushop.repository.CategoryRepository;
 import com.godeltech.edushop.repository.CustomItemRepository;
 import com.godeltech.edushop.repository.ItemRepository;
+import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,12 @@ import java.util.List;
 public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private CustomItemRepository customItemRepository;
@@ -53,4 +62,11 @@ public class ItemService {
     public Long getItemsCount(Long supplierId){
         return itemRepository.getItemsCount(supplierId);
     }
+
+    public ItemDTO addItem(Item item){
+        item.setSupplier(userRepository.findOne(item.getSupplier().getId()));
+        item.setCategory(categoryRepository.findOne(item.getCategory().getId()));
+        return itemConverter.convertItem(itemRepository.save(item));
+    }
 }
+

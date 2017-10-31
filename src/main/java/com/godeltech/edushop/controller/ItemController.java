@@ -5,6 +5,8 @@ import com.godeltech.edushop.dto.ItemFilter;
 import com.godeltech.edushop.dto.ItemDTO;
 import com.godeltech.edushop.dto.ItemFilterWithPaging;
 import com.godeltech.edushop.dto.ItemSupplierDto;
+import com.godeltech.edushop.model.Item;
+import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.ItemRepository;
 import com.godeltech.edushop.service.ItemService;
 import com.google.common.collect.Lists;
@@ -39,6 +41,12 @@ public class ItemController {
 //    public ResponseEntity<List<Item>> findAllBySupplier() {
 //        return new ResponseEntity<>(itemRepository.findItemsForUser(), HttpStatus.FOUND);
 //    }
+
+    @RequestMapping(value = "/addItem", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ItemDTO addItem(@RequestBody Item item) {
+        return itemService.addItem(item);
+
+    }
 
     @RequestMapping(value = "/getAllBySupplier/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> findAllBySupplier(@PathVariable("id") Long id) {

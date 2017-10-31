@@ -20,4 +20,9 @@ public class ItemConverter {
                         i.getQuantity(), i.getPrice(), i.getDiscount()))
                 .collect(Collectors.toList());
     }
+
+    public ItemDTO convertItem(Item item) {
+        return new ItemDTO(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
+                        item.getQuantity(), item.getPrice(), item.getDiscount());
+    }
 }

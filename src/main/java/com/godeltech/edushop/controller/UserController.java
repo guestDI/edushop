@@ -46,14 +46,12 @@ public class UserController {
 
     @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfileDTO> getUserInfo(@PathVariable("id") Long id) {
-
         return new ResponseEntity<>(userService.getUserProfile(id), HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public User addUser(@RequestBody User user) {
-
         return userService.addUser(user);
 
     }
