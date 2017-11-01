@@ -73,4 +73,14 @@ public class UserService {
 
         return  userLoginDTO;
     }
+
+    public UserDTO getUserById(Long id) {
+        User user = userRepository.findOne(id);
+        UserDTO userDTO = null;
+        if (user != null) {
+            userDTO = userConverter.convertUser(user);
+        }
+
+        return userDTO;
+    }
 }
