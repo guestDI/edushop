@@ -68,5 +68,9 @@ public class ItemService {
         item.setCategory(categoryRepository.findOne(item.getCategory().getId()));
         return itemConverter.convertItem(itemRepository.save(item));
     }
+
+    public void deleteItem(Long id){
+        itemRepository.delete(id);
+    }
 }
 

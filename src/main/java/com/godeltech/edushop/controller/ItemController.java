@@ -45,14 +45,17 @@ public class ItemController {
     @RequestMapping(value = "/addItem", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDTO addItem(@RequestBody Item item) {
         return itemService.addItem(item);
+    }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/deleteItem/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteItemById(@PathVariable("id") Long id){
+        itemRepository.delete(id);
     }
 
     @RequestMapping(value = "/getAllBySupplier/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> findAllBySupplier(@PathVariable("id") Long id) {
-
         return new ResponseEntity<>(itemConverter.convertItem(Lists.newArrayList(itemRepository.findAll(Collections.singleton(id)))), HttpStatus.OK);
-
     }
 
     @RequestMapping(value = "/filterItems", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/v1/categories")
-@Permissions(roles = {"Administrator", "Seller", "Buyer", "Premium_Buyer"})
+//@Permissions(roles = {"Administrator", "Seller", "Buyer", "Premium_Buyer"})
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @Permissions(roles = {"Administrator"})
+//    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getAllCategories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Category> findAll() {
         return categoryService.getAll();

@@ -5,7 +5,9 @@ import com.godeltech.edushop.dto.UserDTO;
 import com.godeltech.edushop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +36,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (CorsUtils.isPreFlightRequest(request)) {
+            return true;
+        }
         Permissions permissionAnnotation = getPermissionAnnotation((HandlerMethod) handler);
         if (isNull(permissionAnnotation)) {
             return true;

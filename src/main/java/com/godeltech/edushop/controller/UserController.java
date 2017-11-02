@@ -67,6 +67,7 @@ public class UserController {
         return userService.updateUserStatus(id, status);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteUser(@PathVariable("id") Long id) {
 
