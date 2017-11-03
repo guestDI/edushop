@@ -50,7 +50,12 @@ public class ItemController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/deleteItem/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteItemById(@PathVariable("id") Long id){
-        itemRepository.delete(id);
+        itemService.deleteItem(id);
+    }
+
+    @RequestMapping(value = "/editItem", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void editItemById(@RequestBody ItemDTO itemDTO){
+        itemService.updateItem(itemDTO);
     }
 
     @RequestMapping(value = "/getAllBySupplier/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -72,5 +72,9 @@ public class ItemService {
     public void deleteItem(Long id){
         itemRepository.delete(id);
     }
+
+    public void updateItem(ItemDTO itemDTO){
+        itemRepository.update(itemDTO);
+    }
 }
 
