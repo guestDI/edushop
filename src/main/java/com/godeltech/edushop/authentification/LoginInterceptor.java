@@ -39,6 +39,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (CorsUtils.isPreFlightRequest(request)) {
             return true;
         }
+
         Permissions permissionAnnotation = getPermissionAnnotation((HandlerMethod) handler);
         if (isNull(permissionAnnotation)) {
             return true;

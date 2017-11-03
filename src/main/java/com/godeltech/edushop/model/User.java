@@ -48,7 +48,7 @@ public class User{
     @PrePersist
     public void prePersist() {
         this.registrationDate = new Date();
-//        this.active = true;
+        this.active = true;
     }
 
     public User(String username, String lastname) {
