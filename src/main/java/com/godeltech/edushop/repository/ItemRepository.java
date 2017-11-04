@@ -20,6 +20,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             "AND (:#{#filter.minPrice} IS NULL OR i.price >= :#{#filter.minPrice}) " +
             "AND (:#{#filter.maxPrice} IS NULL OR i.price <= :#{#filter.maxPrice}) " +
             "AND (:#{#filter.discount} IS NULL OR i.discount > 0) " +
+            "AND (:#{#filter.inStore} IS NULL OR i.quantity > 0) " +
             "AND (:#{#filter.categoryId} IS NULL OR i.category.id = :#{#filter.categoryId}) ")
     List<Item> findItemsByFilter(@Param("filter") ItemFilter itemFilter);
 
@@ -29,6 +30,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             "AND (:#{#filter.minPrice} IS NULL OR i.price >= :#{#filter.minPrice}) " +
             "AND (:#{#filter.maxPrice} IS NULL OR i.price <= :#{#filter.maxPrice}) " +
             "AND (:#{#filter.discount} IS NULL OR i.discount > 0) " +
+            "AND (:#{#filter.inStore} IS NULL OR i.quantity > 0) " +
             "AND (:#{#filter.categoryId} IS NULL OR i.category.id = :#{#filter.categoryId}) ")
     Long findItemsCountByFilter(@Param("filter") ItemFilter itemFilter);
 
@@ -38,6 +40,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             "AND (:#{#filter.minPrice} IS NULL OR i.price >= :#{#filter.minPrice}) " +
             "AND (:#{#filter.maxPrice} IS NULL OR i.price <= :#{#filter.maxPrice}) " +
             "AND (:#{#filter.discount} IS NULL OR i.discount > 0) " +
+            "AND (:#{#filter.inStore} IS NULL OR i.quantity > 0) " +
             "AND (:#{#filter.categoryId} IS NULL OR i.category.id IN (SELECT c.id FROM Category c WHERE c.parentCategory.id = :#{#filter.categoryId} OR c.id = :#{#filter.categoryId}))" )
     List<Item> findItemsByFilterAndPage(@Param("filter") ItemFilter itemFilter, Pageable pageable);
 

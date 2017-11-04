@@ -21,6 +21,7 @@ public class ItemFilter {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Boolean discount;
+    private Boolean inStore;
     private Long categoryId;
     private Long childCategoryId;
 
