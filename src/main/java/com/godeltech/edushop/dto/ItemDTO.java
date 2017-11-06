@@ -1,5 +1,8 @@
 package com.godeltech.edushop.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.godeltech.edushop.model.Category;
 import com.godeltech.edushop.model.Role;
 import lombok.*;
@@ -18,6 +21,8 @@ import java.util.Date;
 @Builder
 public class ItemDTO {
     private Long id;
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="name")
+    @JsonIdentityReference(alwaysAsId=true)
     private Category category;
     private String manufacturer;
     private String name;
