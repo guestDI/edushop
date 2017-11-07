@@ -1,13 +1,9 @@
 package com.godeltech.edushop;
 
-import com.godeltech.edushop.model.Category;
-import com.godeltech.edushop.model.Item;
-import com.godeltech.edushop.model.Role;
-import com.godeltech.edushop.model.User;
-import com.godeltech.edushop.repository.CategoryRepository;
-import com.godeltech.edushop.repository.ItemRepository;
-import com.godeltech.edushop.repository.RoleRepository;
-import com.godeltech.edushop.repository.UserRepository;
+import com.godeltech.edushop.model.*;
+import com.godeltech.edushop.repository.*;
+import com.godeltech.edushop.rest.NetClientGet;
+import com.godeltech.edushop.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -18,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.jws.soap.SOAPBinding;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by d.ihnatovich on 9/29/2017.
@@ -34,6 +31,12 @@ public class DataLoader implements ApplicationRunner {
     private ItemRepository itemRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private RateRepository rateRepository;
+    @Autowired
+    private NetClientGet netClientGet;
+    @Autowired
+    private RateService rateService;
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
@@ -155,6 +158,15 @@ public class DataLoader implements ApplicationRunner {
         itemRepository.save(item1);
         itemRepository.save(item2);
         itemRepository.save(item3);
+
+//        Rate newRate = new Rate(new Date(), new BigDecimal(0.76264), new BigDecimal(0.86281));
+//        Thread.sleep(3000);
+//        Rate newRate1 = new Rate(new Date(), new BigDecimal(0.66264), new BigDecimal(0.76281));
+//        rateRepository.save(newRate);
+//        rateRepository.save(newRate1);
+
+//        netClientGet.getRate();
+        rateService.saveCurrentRate();
     }
 
 }

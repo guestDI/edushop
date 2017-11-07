@@ -26,7 +26,6 @@ public class ItemFilter {
     private Long childCategoryId;
 
     public String getDescription() {
-        String temp = StringUtils.isEmpty(this.description) ? null : "%" + description + "%";
-        return temp;
+        return StringUtils.isEmpty(this.description) ? null : "%" + description + "%";
     }
 }
