@@ -36,7 +36,6 @@ public class NetClientGet {
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
 
-            System.out.println("Output from Server .... \n");
             String output;
             while ((output = br.readLine()) != null) {
                 result = output;

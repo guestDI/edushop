@@ -18,6 +18,5 @@ public class RateDTO {
     private String base;
     private Date date;
     private Rates rates;
-//    private BigDecimal pound;
-//    private BigDecimal euro;
+
 }

@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by d.ihnatovich on 9/29/2017.
@@ -45,6 +47,14 @@ public class Item {
     private BigDecimal price;
 
     @Column
+    private BigDecimal euro;
+
+    @Column
+    private BigDecimal pound;
+
+    @Column
     private int discount;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Order> orders = new ArrayList<>();
 }
