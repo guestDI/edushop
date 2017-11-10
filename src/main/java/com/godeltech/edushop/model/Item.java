@@ -54,7 +54,4 @@ public class Item {
 
     @Column
     private int discount;
-
-    @ManyToMany(mappedBy = "items")
-    private List<Order> orders = new ArrayList<>();
 }

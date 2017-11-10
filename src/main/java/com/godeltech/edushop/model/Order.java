@@ -3,6 +3,7 @@ package com.godeltech.edushop.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,20 +23,14 @@ public class Order {
     @JoinColumn(name = "buyer_id")
     private User user;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(
-            name = "order_item",
-            joinColumns = { @JoinColumn(name = "order_id") },
-            inverseJoinColumns = { @JoinColumn(name = "item_id") }
-    )
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
-    private List<Item> items;
+    @Column
+    private Date orderDate;
 
-    public Order(User user, List<Item> items) {
+    public Order(User user, List<OrderItem> orderItems) {
         this.user = user;
-        this.items = items;
+        this.orderItems = orderItems;
     }
 }
