@@ -1,8 +1,10 @@
 package com.godeltech.edushop.converter;
 
 import com.godeltech.edushop.dto.ItemDTO;
+import com.godeltech.edushop.dto.ItemOrderDto;
 import com.godeltech.edushop.dto.UserDTO;
 import com.godeltech.edushop.model.Item;
+import com.godeltech.edushop.model.OrderItem;
 import com.godeltech.edushop.model.User;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +26,11 @@ public class ItemConverter {
     public ItemDTO convertItem(Item item) {
         return new ItemDTO(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
                         item.getQuantity(), item.getPrice(), item.getDiscount());
+    }
+
+    public ItemOrderDto convertItemForOrder(OrderItem orderItem) {
+        Item item = orderItem.getItem();
+        return new ItemOrderDto(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
+                orderItem.getQuantity());
     }
 }

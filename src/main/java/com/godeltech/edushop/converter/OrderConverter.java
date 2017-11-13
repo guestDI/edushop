@@ -1,14 +1,11 @@
 package com.godeltech.edushop.converter;
 
 import com.godeltech.edushop.dto.OrderDTO;
-import com.godeltech.edushop.model.Item;
+import com.godeltech.edushop.dto.SaveOrderDTO;
 import com.godeltech.edushop.model.Order;
 import com.godeltech.edushop.model.OrderItem;
-import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.ItemRepository;
-import com.godeltech.edushop.repository.OrderItemRepository;
 import com.godeltech.edushop.repository.UserRepository;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,12 +26,15 @@ public class OrderConverter {
     @Autowired
     private ItemRepository itemRepository;
 
-    public Order convert(OrderDTO orderDTO) {
+    @Autowired
+    private ItemConverter itemConverter;
+
+    public Order convert(SaveOrderDTO saveOrderDTO) {
         Order order = new Order();
-        order.setUser(Optional.of(orderDTO.getBuyerId()).map(userRepository::findOne).get());
+        order.setUser(Optional.of(saveOrderDTO.getBuyerId()).map(userRepository::findOne).get());
         order.setOrderDate(new Date());
 
-        List<OrderItem> orderItems = orderDTO.getItemIds().stream()
+        List<OrderItem> orderItems = saveOrderDTO.getItemIds().stream()
                 .map(it -> {
                     OrderItem orderItem = new OrderItem();
                     orderItem.setQuantity(it.getQuantity());
@@ -45,5 +45,15 @@ public class OrderConverter {
         order.setOrderItems(orderItems);
 
         return order;
+    }
+
+    public OrderDTO convert(Order order) {
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderId(order.getId());
+        orderDTO.setBuyerId(order.getUser().getId());
+        orderDTO.setDate(order.getOrderDate());
+        orderDTO.setItems(order.getOrderItems().stream()
+                .map(itemConverter::convertItemForOrder).collect(Collectors.toList()));
+        return orderDTO;
     }
 }

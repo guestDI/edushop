@@ -1,14 +1,15 @@
 package com.godeltech.edushop.controller;
 
-import com.godeltech.edushop.dto.ItemDTO;
 import com.godeltech.edushop.dto.OrderDTO;
-import com.godeltech.edushop.model.Item;
+import com.godeltech.edushop.dto.SaveOrderDTO;
 import com.godeltech.edushop.model.Order;
 import com.godeltech.edushop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by d.ihnatovich on 11/8/2017.
@@ -22,7 +23,12 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/addOrder", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void addOrder(@RequestBody OrderDTO orderDTO) {
-        orderService.addOrder(orderDTO);
+    public void addOrder(@RequestBody SaveOrderDTO saveOrderDTO) {
+        orderService.addOrder(saveOrderDTO);
+    }
+
+    @RequestMapping(value = "/getOrders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrderDTO> getOrders(@PathVariable Long id) {
+        return orderService.getAllOrderById(id);
     }
 }
