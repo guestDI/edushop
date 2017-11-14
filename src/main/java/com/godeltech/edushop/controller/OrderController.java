@@ -1,5 +1,6 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.annotation.Permissions;
 import com.godeltech.edushop.dto.OrderDTO;
 import com.godeltech.edushop.dto.SaveOrderDTO;
 import com.godeltech.edushop.model.Order;
@@ -27,6 +28,7 @@ public class OrderController {
         orderService.addOrder(saveOrderDTO);
     }
 
+//    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getOrders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDTO> getOrders(@PathVariable Long id) {
         return orderService.getAllOrderById(id);

@@ -47,19 +47,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         String token = request.getHeader("token");
         if (!users.containsKey(token)) {
-            throw new RuntimeException("token is empty");
+            throw new AuthException("token is empty");
         }
 
         Long userId = users.get(token);
         UserDTO userById = userService.getUserById(userId);
         if (isNull(userById)) {
-            throw new RuntimeException("User is not found");
+            throw new AuthException("User is not found");
         }
 
         boolean roleMatch = Stream.of(permissionAnnotation.roles())
                 .anyMatch(role -> role.equals(userById.getRole().getName()));
         if (!roleMatch) {
-            throw new RuntimeException("Permission denied");
+            throw new AuthException("Permission denied");
         }
 
         return super.preHandle(request, response, handler);
