@@ -25,4 +25,5 @@ public class ItemOrderDto {
     private String name;
     private String description;
     private int quantity;
+    private BigDecimal packPrice;
 }

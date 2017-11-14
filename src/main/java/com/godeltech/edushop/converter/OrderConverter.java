@@ -1,5 +1,6 @@
 package com.godeltech.edushop.converter;
 
+import com.godeltech.edushop.dto.ItemOrderDto;
 import com.godeltech.edushop.dto.OrderDTO;
 import com.godeltech.edushop.dto.SaveOrderDTO;
 import com.godeltech.edushop.model.Order;
@@ -9,6 +10,7 @@ import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +56,10 @@ public class OrderConverter {
         orderDTO.setDate(order.getOrderDate());
         orderDTO.setItems(order.getOrderItems().stream()
                 .map(itemConverter::convertItemForOrder).collect(Collectors.toList()));
+        orderDTO.setTotalPrice(
+                orderDTO.getItems().stream()
+                        .map(ItemOrderDto::getPackPrice)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add));
         return orderDTO;
     }
 }

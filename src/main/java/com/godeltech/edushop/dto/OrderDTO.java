@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -26,4 +27,5 @@ public class OrderDTO {
     @JsonSerialize(using = DateSerializer.class)
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
     private Date date;
+    private BigDecimal totalPrice;
 }

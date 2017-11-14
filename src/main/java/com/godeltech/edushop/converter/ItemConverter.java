@@ -8,6 +8,7 @@ import com.godeltech.edushop.model.OrderItem;
 import com.godeltech.edushop.model.User;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,6 @@ public class ItemConverter {
     public ItemOrderDto convertItemForOrder(OrderItem orderItem) {
         Item item = orderItem.getItem();
         return new ItemOrderDto(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
-                orderItem.getQuantity());
+                orderItem.getQuantity(), orderItem.getItem().getPrice().multiply(new BigDecimal(orderItem.getQuantity())));
     }
 }
