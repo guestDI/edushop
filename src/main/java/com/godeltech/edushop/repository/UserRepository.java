@@ -31,6 +31,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("Update User u SET u.active = :status WHERE u.id = :id")
     Integer updateUserStatus(@Param("id") Long userId, @Param("status") boolean status);
 
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE User u SET u.role.id = :roleId WHERE u.id = :id")
+    Integer updateUserRole(@Param("id") Long userId, @Param("roleId") Long roleId);
+
     @Query("Select u from User u where u.username = :username AND u.password = :password")
     User login(@Param("username") String username, @Param("password") String password);
 }

@@ -16,4 +16,7 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o WHERE o.user.id = :id")
     List<Order> findByBuyerId(@Param("id") Long id);
+
+    @Query("SELECT COUNT(*) FROM Order o WHERE o.user.id = :id")
+    int getOrdersCountByBuyerId(@Param("id") Long id);
 }
