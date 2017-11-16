@@ -16,7 +16,7 @@ import java.util.Date;
 public class UserLoginDTO {
     private Long id;
     private String username;
-    private Long role;
+    private String role;
     private boolean active;
     private String token;
 }

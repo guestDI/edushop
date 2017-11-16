@@ -35,7 +35,7 @@ public class UserConverter {
 
     public UserLoginDTO convertUserLogin(User user) {
         String token = RandomStringUtils.randomAlphanumeric(10);
-        return new UserLoginDTO(user.getId(), user.getUsername(), user.getRole().getId(), user.isActive(), token);
+        return new UserLoginDTO(user.getId(), user.getUsername(), user.getRole().getName(), user.isActive(), token);
 
     }
 }
