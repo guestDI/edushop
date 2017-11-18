@@ -54,4 +54,7 @@ public class Item {
 
     @Column
     private int discount;
+
+    @Column
+    private String productPhoto;
 }
