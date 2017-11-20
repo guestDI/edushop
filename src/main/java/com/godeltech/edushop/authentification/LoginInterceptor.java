@@ -31,7 +31,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private Map<String, Long> users = new HashMap<>();
 
     public void register(Long id, String token){
-        users.put(token, id);
+        if (!users.containsValue(id)) {
+            users.put(token, id);
+        }
+    }
+
+    public void logout(Long id) {
+        users.entrySet().stream()
+                .filter(it -> it.getValue().equals(id))
+                .findFirst()
+                .ifPresent(it -> users.remove(it.getKey()));
     }
 
     @Override

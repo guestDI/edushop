@@ -31,7 +31,9 @@ public class ItemConverter {
 
     public ItemOrderDto convertItemForOrder(OrderItem orderItem) {
         Item item = orderItem.getItem();
+        BigDecimal priceOfItem = orderItem.getItem().getPrice().subtract((orderItem.getItem().getPrice().multiply(new BigDecimal(orderItem.getItem().getDiscount()))).divide(new BigDecimal(100)));
+        BigDecimal finalPrice = priceOfItem.multiply(new BigDecimal(orderItem.getQuantity()));
         return new ItemOrderDto(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
-                orderItem.getQuantity(), orderItem.getItem().getPrice().multiply(new BigDecimal(orderItem.getQuantity())));
+                orderItem.getQuantity(), finalPrice);
     }
 }
