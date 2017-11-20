@@ -20,13 +20,13 @@ public class ItemConverter {
     public List<ItemDTO> convertItem(List<Item> items) {
         return items.stream()
                 .map((i) -> new ItemDTO(i.getId(), i.getCategory(), i.getManufacturer(), i.getName(), i.getDescription(),
-                        i.getQuantity(), i.getPrice(), i.getDiscount()))
+                        i.getQuantity(), i.getPrice(), i.getDiscount(), i.getProductPhoto()))
                 .collect(Collectors.toList());
     }
 
     public ItemDTO convertItem(Item item) {
         return new ItemDTO(item.getId(), item.getCategory(), item.getManufacturer(), item.getName(), item.getDescription(),
-                        item.getQuantity(), item.getPrice(), item.getDiscount());
+                        item.getQuantity(), item.getPrice(), item.getDiscount(), item.getProductPhoto());
     }
 
     public ItemOrderDto convertItemForOrder(OrderItem orderItem) {

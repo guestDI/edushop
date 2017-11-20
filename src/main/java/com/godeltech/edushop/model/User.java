@@ -39,7 +39,7 @@ public class User{
     @Column(nullable = false)
     private Date registrationDate = new Date();
     @Column
-    private byte[] profilePhoto;
+    private String profilePhoto;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -17,5 +17,5 @@ public class UserProfileDTO {
     private String lastname;
     private String email;
     private String role;
-    private byte[] profilePhoto;
+    private String profilePhoto;
 }

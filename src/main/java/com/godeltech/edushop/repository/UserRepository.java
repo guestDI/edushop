@@ -23,7 +23,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findExceptAdmin();
 
     @Modifying
-    @Query("UPDATE User u SET u.firstname = :#{#dto.firstname}, u.lastname = :#{#dto.lastname}, u.email = :#{#dto.email}" +
+    @Query("UPDATE User u SET u.firstname = :#{#dto.firstname}, u.lastname = :#{#dto.lastname}, u.email = :#{#dto.email}, u.profilePhoto = :#{#dto.profilePhoto}" +
             " WHERE u.id = :#{#dto.id}")
     int update(@Param("dto") UserProfileDTO dto);
 
