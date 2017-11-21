@@ -56,6 +56,10 @@ public class UserService {
         return userConverter.convertUser(userRepository.findExceptAdmin());
     }
 
+    public Integer getNumberOfNotAdminUsers(){
+        return userRepository.findNumberOfUsersExceptAdmin();
+    }
+
     public Integer updateUserStatus(Long id, boolean status){
         return userRepository.updateUserStatus(id, status);
     }

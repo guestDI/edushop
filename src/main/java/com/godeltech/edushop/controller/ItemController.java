@@ -85,8 +85,14 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/getItemsCount/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Long getItemsCount(@PathVariable("id") Long id) {
+    public Long getItemsCountById(@PathVariable("id") Long id) {
         return itemService.getItemsCount(id);
+
+    }
+
+    @RequestMapping(value = "/getAllItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getItemsCount() {
+        return itemService.getCountOfItems();
 
     }
 
