@@ -50,6 +50,9 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query("SELECT count(*) from Item")
     Long getCountOfAllItems();
 
+    @Query("SELECT count(*) from Item i WHERE i.discount > 0")
+    Long getCountOfAllItemsWithDiscount();
+
     @Modifying
     @Query("UPDATE Item i SET i.category.id = :#{#dto.category.id}, i.manufacturer = :#{#dto.manufacturer}, i.name = :#{#dto.name}, " +
             "i.description = :#{#dto.description}, i.quantity = :#{#dto.quantity}, i.price = :#{#dto.price}, i.discount = :#{#dto.discount}" +

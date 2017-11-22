@@ -49,6 +49,16 @@ public class UserController {
         return userService.getNumberOfNotAdminUsers();
     }
 
+    @RequestMapping(value = "/getCountDisabledNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public int findNumberOfDisabledNotAdminUsers() {
+        return userService.getNumberOfDisabledNotAdminUsers();
+    }
+
+    @RequestMapping(value = "/getCountNotAdminWithoutItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public int findNumberOfdNotAdminUsersWithoutItems() {
+        return userService.getNumberOfNotAdminUsersWithoutItems();
+    }
+
     @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfileDTO> getUserInfo(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getUserProfile(id), HttpStatus.OK);

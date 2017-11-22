@@ -93,9 +93,9 @@ public class OrderService {
     public void checkAndUpdateUserRole(Long buyerId){
         User user = userRepository.findOne(buyerId);
         if(!PREMIUM_BUYER.getRoleName().equals(user.getRole().getName())) {
-            int ordersCountByBuyerId = orderRepository.getOrdersCountByBuyerId(buyerId);
+            long ordersCountByBuyerId = orderRepository.getOrdersCountByBuyerId(buyerId);
 
-            if(ordersCountByBuyerId >= 3){
+            if(ordersCountByBuyerId >= 3L){
                 userRepository.updateUserRole(buyerId, roleRepository.findByName(PREMIUM_BUYER.getRoleName()).getId());
             }
         }
@@ -103,5 +103,9 @@ public class OrderService {
 
     public List<OrderDTO> getAllOrderById(Long id) {
         return orderRepository.findByBuyerId(id).stream().map(it -> orderConverter.convert(it)).collect(Collectors.toList());
+    }
+
+    public Long getOrdersCountById(Long id) {
+        return orderRepository.getOrdersCountByBuyerId(id);
     }
 }

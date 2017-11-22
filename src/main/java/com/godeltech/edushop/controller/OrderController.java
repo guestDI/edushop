@@ -33,4 +33,9 @@ public class OrderController {
     public List<OrderDTO> getOrders(@PathVariable Long id) {
         return orderService.getAllOrderById(id);
     }
+
+    @RequestMapping(value = "/getOrdersCount/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getOrdersCount(@PathVariable Long id) {
+        return orderService.getOrdersCountById(id);
+    }
 }

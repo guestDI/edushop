@@ -60,6 +60,14 @@ public class UserService {
         return userRepository.findNumberOfUsersExceptAdmin();
     }
 
+    public Integer getNumberOfDisabledNotAdminUsers(){
+        return userRepository.findNumberOfDisabledUsersExceptAdmin();
+    }
+
+    public Integer getNumberOfNotAdminUsersWithoutItems(){
+        return userRepository.findNumberOfUsersWithoutItems();
+    }
+
     public Integer updateUserStatus(Long id, boolean status){
         return userRepository.updateUserStatus(id, status);
     }

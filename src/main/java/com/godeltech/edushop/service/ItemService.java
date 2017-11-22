@@ -67,6 +67,10 @@ public class ItemService {
         return itemRepository.getCountOfAllItems();
     }
 
+    public Long getCountOfItemsWithDiscount(){
+        return itemRepository.getCountOfAllItemsWithDiscount();
+    }
+
     public ItemDTO addItem(Item item){
         item.setSupplier(userRepository.findOne(item.getSupplier().getId()));
         item.setCategory(categoryRepository.findOne(item.getCategory().getId()));

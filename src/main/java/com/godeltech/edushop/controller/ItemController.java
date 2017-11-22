@@ -96,4 +96,10 @@ public class ItemController {
 
     }
 
+    @RequestMapping(value = "/getAllItemsWithDiscount", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getItemsCountWithDiscount() {
+        return itemService.getCountOfItemsWithDiscount();
+
+    }
+
 }

@@ -25,6 +25,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("Select count(*) from User u where u.role.id != 1")
     int findNumberOfUsersExceptAdmin();
 
+    @Query("Select count(*) from User u where u.role.id != 1 AND u.active != true")
+    int findNumberOfDisabledUsersExceptAdmin();
+
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM public.\"user\" u LEFT JOIN item i on u.id = i.supplier_id " +
+            "JOIN role r on u.role_id = r.id WHERE r.name = 'Seller' AND i.supplier_id is Null")
+    int findNumberOfUsersWithoutItems();
+
     @Modifying
     @Query("UPDATE User u SET u.firstname = :#{#dto.firstname}, u.lastname = :#{#dto.lastname}, u.email = :#{#dto.email}, u.profilePhoto = :#{#dto.profilePhoto}" +
             " WHERE u.id = :#{#dto.id}")
