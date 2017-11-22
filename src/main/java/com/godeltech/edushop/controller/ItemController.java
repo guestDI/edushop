@@ -81,24 +81,27 @@ public class ItemController {
     @RequestMapping(value = "/filterItemsBySupplier/{id}/{page}/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ItemDTO>> filterItemsForPage(@PathVariable("id") Long id, @PathVariable("page") Integer page, @PathVariable("count") Integer count) {
         return new ResponseEntity<>(itemService.getItemsForPage(new ItemSupplierDto(id, page, count)), HttpStatus.OK);
-
     }
 
     @RequestMapping(value = "/getItemsCount/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCountById(@PathVariable("id") Long id) {
         return itemService.getItemsCount(id);
-
     }
 
     @RequestMapping(value = "/getAllItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCount() {
         return itemService.getCountOfItems();
-
     }
 
     @RequestMapping(value = "/getAllItemsWithDiscount", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCountWithDiscount() {
         return itemService.getCountOfItemsWithDiscount();
+
+    }
+
+    @RequestMapping(value = "/getAllItemsWithZeroQuantity/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getItemsWithZeroQuantity(@PathVariable("id") Long id) {
+        return itemService.getCountOfItemsWithZeroQuantity(id);
 
     }
 
