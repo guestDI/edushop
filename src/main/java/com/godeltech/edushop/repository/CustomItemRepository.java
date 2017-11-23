@@ -31,6 +31,17 @@ public class CustomItemRepository {
         return query.getResultList();
     }
 
+    public List<Item> findZeroItemsForPage(ItemSupplierDto itemSupplierDto) {
+        Query query = entityManager.createQuery("SELECT i FROM Item i WHERE i.supplier.id=:id AND i.quantity = 0");
+        query.setParameter("id", itemSupplierDto.getSupplierId());
+
+        PageRequest pageRequest = new PageRequest(itemSupplierDto.getPage(), itemSupplierDto.getCount());
+        query.setFirstResult(pageRequest.getOffset());
+        query.setMaxResults(pageRequest.getPageSize());
+
+        return query.getResultList();
+    }
+
 //    public List<Item> findItemsByFilterForPage(ItemFilterWithPaging itemFilterWithPaging) {
 //        "SELECT i FROM Item i WHERE ( :#{#filter.manufacturer} IS NULL OR i.manufacturer = :#{#filter.manufacturer}) " +
 //                "AND (:#{#filter.description} IS NULL OR i.description LIKE :#{#filter.description}) " +

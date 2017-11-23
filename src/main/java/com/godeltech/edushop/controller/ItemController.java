@@ -83,6 +83,11 @@ public class ItemController {
         return new ResponseEntity<>(itemService.getItemsForPage(new ItemSupplierDto(id, page, count)), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/filterZeroItemsBySupplier/{id}/{page}/{count}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ItemDTO>> filterZeroItemsForPage(@PathVariable("id") Long id, @PathVariable("page") Integer page, @PathVariable("count") Integer count) {
+        return new ResponseEntity<>(itemService.getZeroItemsForPage(new ItemSupplierDto(id, page, count)), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/getItemsCount/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCountById(@PathVariable("id") Long id) {
         return itemService.getItemsCount(id);

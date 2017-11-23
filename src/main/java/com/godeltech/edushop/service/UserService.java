@@ -1,6 +1,7 @@
 package com.godeltech.edushop.service;
 
 import com.godeltech.edushop.assembler.UserProfileAssembler;
+import com.godeltech.edushop.authentification.LoginInterceptor;
 import com.godeltech.edushop.converter.UserConverter;
 import com.godeltech.edushop.dto.UserDTO;
 import com.godeltech.edushop.dto.UserLoginDTO;
@@ -38,6 +39,9 @@ public class UserService {
 
     @Autowired
     private UserProfileAssembler userProfileAssembler;
+
+    @Autowired
+    private LoginInterceptor loginInterceptor;
 
     public void updateUserProfile(UserProfileDTO userProfileDTO){
         userRepository.update(userProfileDTO);
@@ -84,6 +88,10 @@ public class UserService {
         }
 
         return  userLoginDTO;
+    }
+
+    public void logout(Long id) {
+        loginInterceptor.logout(id);
     }
 
     public UserDTO getUserById(Long id) {

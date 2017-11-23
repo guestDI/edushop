@@ -101,4 +101,9 @@ public class UserController {
         return userLoginDTO;
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void logout(@RequestParam("id") Long id) {
+        userService.logout(id);
+    }
+
 }

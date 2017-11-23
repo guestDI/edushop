@@ -59,6 +59,10 @@ public class ItemService {
         return itemConverter.convertItem(customItemRepository.findItemsForPage(itemSupplierDto));
     }
 
+    public List<ItemDTO> getZeroItemsForPage(ItemSupplierDto itemSupplierDto){
+        return itemConverter.convertItem(customItemRepository.findZeroItemsForPage(itemSupplierDto));
+    }
+
     public Long getItemsCount(Long supplierId){
         return itemRepository.getItemsCount(supplierId);
     }
