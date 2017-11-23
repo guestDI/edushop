@@ -62,4 +62,8 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
             " WHERE i.id = :#{#dto.id}")
     int update(@Param("dto") ItemDTO dto);
 
+    @Modifying(clearAutomatically = true)
+    @Query("Update Item i SET i.active = :status WHERE i.id = :id")
+    Integer deleteItemFromShelf(@Param("id") Long id, @Param("status") boolean status);
+
 }

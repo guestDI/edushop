@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,4 +58,12 @@ public class Item {
 
     @Column
     private String productPhoto;
+
+    @Column
+    private boolean active;
+
+    @PrePersist
+    public void prePersist() {
+        this.active = true;
+    }
 }

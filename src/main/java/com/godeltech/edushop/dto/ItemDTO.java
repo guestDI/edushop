@@ -31,4 +31,5 @@ public class ItemDTO {
     private BigDecimal price;
     private int discount;
     private String productPhoto;
+    private boolean active;
 }

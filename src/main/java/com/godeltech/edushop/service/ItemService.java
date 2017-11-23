@@ -89,6 +89,10 @@ public class ItemService {
         itemRepository.delete(id);
     }
 
+    public void deleteItemFromShelf(Long id, boolean status){
+        itemRepository.deleteItemFromShelf(id, status);
+    }
+
     public void updateItem(ItemDTO itemDTO){
         itemRepository.update(itemDTO);
     }
