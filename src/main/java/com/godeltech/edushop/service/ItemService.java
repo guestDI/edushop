@@ -63,6 +63,10 @@ public class ItemService {
         return itemConverter.convertItem(customItemRepository.findZeroItemsForPage(itemSupplierDto));
     }
 
+    public List<ItemDTO> getDisabledItemsForPage(ItemSupplierDto itemSupplierDto){
+        return itemConverter.convertItem(customItemRepository.findDisabledItemsForPage(itemSupplierDto));
+    }
+
     public Long getItemsCount(Long supplierId){
         return itemRepository.getItemsCount(supplierId);
     }
@@ -77,6 +81,10 @@ public class ItemService {
 
     public Long getCountOfItemsWithZeroQuantity(Long supplierId){
         return itemRepository.getCountOfAllItemsWithZeroQuantity(supplierId);
+    }
+
+    public Long getCountOfDisabledItems(Long supplierId){
+        return itemRepository.getCountOfAllDisabledItems(supplierId);
     }
 
     public ItemDTO addItem(Item item){
@@ -94,6 +102,7 @@ public class ItemService {
     }
 
     public void updateItem(ItemDTO itemDTO){
+        itemDTO.setCategory(categoryRepository.findByName(itemDTO.getCategory().getName()));
         itemRepository.update(itemDTO);
     }
 }
