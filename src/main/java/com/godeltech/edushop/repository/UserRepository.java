@@ -29,7 +29,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     int findNumberOfDisabledUsersExceptAdmin();
 
     @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM public.\"user\" u LEFT JOIN item i on u.id = i.supplier_id " +
-            "JOIN role r on u.role_id = r.id WHERE r.name = 'Seller' AND i.supplier_id is Null")
+            "JOIN role r on u.role_id = r.id WHERE r.name = 'Seller' AND u.active = true AND i.supplier_id is Null")
     int findNumberOfUsersWithoutItems();
 
     @Modifying
