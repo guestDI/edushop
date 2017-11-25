@@ -61,8 +61,8 @@ public class DataLoader implements ApplicationRunner {
                 .build();
 
         User buyerUser = User.builder()
-                .username("buyer")
-                .password("buyer")
+                .username("sbuyer")
+                .password("sbuyer")
                 .email("buyer@gmail.com")
                 .role(buyerRole)
                 .active(true)
@@ -87,7 +87,6 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(adminUser);
         userRepository.save(buyerUser);
         userRepository.save(sellerUser);
-        userRepository.save(disabledSellerUser);
 
         //Save parent categories
         Category electronicDevice = new Category("Electronic", "Electronic devices");
@@ -106,11 +105,16 @@ public class DataLoader implements ApplicationRunner {
         Category car = new Category(auto, "Cars", null);
         Category tires = new Category(auto, "Tires", null);
 
+        Category tshirts = new Category(clothes, "T-shirts", null);
+        Category pants = new Category(clothes, "Pants", null);
+
         categoryRepository.save(phone);
         categoryRepository.save(tv);
         categoryRepository.save(console);
         categoryRepository.save(car);
         categoryRepository.save(tires);
+        categoryRepository.save(tshirts);
+        categoryRepository.save(pants);
 
         //Save items
         Item item = Item.builder()
@@ -154,10 +158,33 @@ public class DataLoader implements ApplicationRunner {
                 .discount(10)
                 .build();
 
+        Item item4 = Item.builder()
+                .supplier(sellerUser)
+                .category(car)
+                .manufacturer("Nike")
+                .name("Nike Pepe FEELS GOOD MAN")
+                .description("T-shirt for cool guys")
+                .quantity(11)
+                .price(new BigDecimal("16.9"))
+                .build();
+
+        Item item5 = Item.builder()
+                .supplier(sellerUser)
+                .category(car)
+                .manufacturer("H&M")
+                .name("Slim-fit Pants High waist")
+                .description("5-pocket pants in superstretch twill with slim legs and a high waist.")
+                .quantity(11)
+                .price(new BigDecimal("29.99"))
+                .discount(20)
+                .build();
+
         itemRepository.save(item);
         itemRepository.save(item1);
         itemRepository.save(item2);
         itemRepository.save(item3);
+        itemRepository.save(item4);
+        itemRepository.save(item5);
 
 //        Rate newRate = new Rate(new Date(), new BigDecimal(0.76264), new BigDecimal(0.86281));
 //        Thread.sleep(3000);
