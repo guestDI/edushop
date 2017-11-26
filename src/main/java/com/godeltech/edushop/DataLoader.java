@@ -186,13 +186,6 @@ public class DataLoader implements ApplicationRunner {
         itemRepository.save(item4);
         itemRepository.save(item5);
 
-//        Rate newRate = new Rate(new Date(), new BigDecimal(0.76264), new BigDecimal(0.86281));
-//        Thread.sleep(3000);
-//        Rate newRate1 = new Rate(new Date(), new BigDecimal(0.66264), new BigDecimal(0.76281));
-//        rateRepository.save(newRate);
-//        rateRepository.save(newRate1);
-
-//        netClientGet.getRate();
         rateService.saveCurrentRate();
     }
 

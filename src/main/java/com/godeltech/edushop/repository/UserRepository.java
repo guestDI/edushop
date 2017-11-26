@@ -47,4 +47,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("Select u from User u where u.username = :username AND u.password = :password")
     User login(@Param("username") String username, @Param("password") String password);
+
+    @Query("Select COUNT(*) from User u where u.username = :username")
+    int checkUserExists(@Param("username") String username);
 }
