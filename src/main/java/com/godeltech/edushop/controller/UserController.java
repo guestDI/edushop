@@ -1,5 +1,6 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.annotation.Permissions;
 import com.godeltech.edushop.assembler.UserProfileAssembler;
 import com.godeltech.edushop.authentification.LoginInterceptor;
 import com.godeltech.edushop.converter.UserConverter;
@@ -39,21 +40,25 @@ public class UserController {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
+    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> findAllNotAdmin() {
         return new ResponseEntity<>(userService.getNotAdminUsers(), HttpStatus.OK);
     }
 
+    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getCountNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public int findNumberOfUsersNotAdmin() {
         return userService.getNumberOfNotAdminUsers();
     }
 
+    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getCountDisabledNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public int findNumberOfDisabledNotAdminUsers() {
         return userService.getNumberOfDisabledNotAdminUsers();
     }
 
+    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getCountNotAdminWithoutItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public int findNumberOfdNotAdminUsersWithoutItems() {
         return userService.getNumberOfNotAdminUsersWithoutItems();

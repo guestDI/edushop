@@ -1,5 +1,6 @@
 package com.godeltech.edushop.controller;
 
+import com.godeltech.edushop.annotation.Permissions;
 import com.godeltech.edushop.converter.ItemConverter;
 import com.godeltech.edushop.dto.ItemFilter;
 import com.godeltech.edushop.dto.ItemDTO;
@@ -98,11 +99,13 @@ public class ItemController {
         return itemService.getItemsCount(id);
     }
 
+    @Permissions(roles = {"Buyer"})
     @RequestMapping(value = "/getCountOfAllItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCount() {
         return itemService.getCountOfItems();
     }
 
+    @Permissions(roles = {"Buyer"})
     @RequestMapping(value = "/getAllItemsWithDiscount", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getItemsCountWithDiscount() {
         return itemService.getCountOfItemsWithDiscount();

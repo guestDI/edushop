@@ -28,12 +28,13 @@ public class OrderController {
         orderService.addOrder(saveOrderDTO);
     }
 
-//    @Permissions(roles = {"Administrator"})
+    @Permissions(roles = {"Buyer"})
     @RequestMapping(value = "/getOrders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDTO> getOrders(@PathVariable Long id) {
         return orderService.getAllOrderById(id);
     }
 
+    @Permissions(roles = {"Buyer"})
     @RequestMapping(value = "/getOrdersCount/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Long getOrdersCount(@PathVariable Long id) {
         return orderService.getOrdersCountById(id);
