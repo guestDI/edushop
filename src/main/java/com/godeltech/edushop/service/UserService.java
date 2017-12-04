@@ -6,19 +6,14 @@ import com.godeltech.edushop.converter.UserConverter;
 import com.godeltech.edushop.dto.UserDTO;
 import com.godeltech.edushop.dto.UserLoginDTO;
 import com.godeltech.edushop.dto.UserProfileDTO;
-import com.godeltech.edushop.model.Role;
 import com.godeltech.edushop.model.User;
 import com.godeltech.edushop.repository.RoleRepository;
 import com.godeltech.edushop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.plugin.util.UserProfile;
 
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
