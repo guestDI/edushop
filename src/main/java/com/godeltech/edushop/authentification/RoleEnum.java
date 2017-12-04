@@ -7,7 +7,10 @@ import lombok.Getter;
  */
 @Getter
 public enum RoleEnum {
-    PREMIUM_BUYER("Premium_Buyer");
+    PREMIUM_BUYER("Premium_Buyer"),
+    BUYER("Buyer"),
+    SELLER("Seller"),
+    ADMINISTRATOR("Administrator");
 
     private String roleName;
 

@@ -64,6 +64,7 @@ public class UserController {
         return userService.getNumberOfNotAdminUsersWithoutItems();
     }
 
+    @Permissions(roles = {"Administrator", "Seller", "Buyer", "Premium_Buyer"})
     @RequestMapping(value = "/getUserInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfileDTO> getUserInfo(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getUserProfile(id), HttpStatus.OK);
