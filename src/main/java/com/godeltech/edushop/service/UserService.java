@@ -43,8 +43,8 @@ public class UserService {
     }
 
     public User addUser(User user){
-        if(userRepository.checkUserExists(user.getUsername()) > 0){
-            throw new RuntimeException("Username already exists");
+        if(userRepository.checkUserExists(user.getUsername(), user.getEmail()) > 0){
+            throw new RuntimeException("User already exists");
         }
         user.setRole(roleRepository.findOne(user.getRole().getId()));
         return userRepository.save(user);
