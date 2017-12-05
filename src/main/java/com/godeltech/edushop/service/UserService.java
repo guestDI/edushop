@@ -58,6 +58,10 @@ public class UserService {
         return userConverter.convertUser(userRepository.findExceptAdmin());
     }
 
+    public List<UserDTO> getDisabledNotAdminUsers(){
+        return userConverter.convertUser(userRepository.findDisabledExceptAdmin());
+    }
+
     public Integer getNumberOfNotAdminUsers(){
         return userRepository.findNumberOfUsersExceptAdmin();
     }

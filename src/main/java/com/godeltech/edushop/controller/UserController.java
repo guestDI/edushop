@@ -47,6 +47,12 @@ public class UserController {
     }
 
     @Permissions(roles = {"Administrator"})
+    @RequestMapping(value = "/getDisabledNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> findAllDisabledNotAdmin() {
+        return new ResponseEntity<>(userService.getDisabledNotAdminUsers(), HttpStatus.OK);
+    }
+
+    @Permissions(roles = {"Administrator"})
     @RequestMapping(value = "/getCountNotAdmin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public int findNumberOfUsersNotAdmin() {
         return userService.getNumberOfNotAdminUsers();

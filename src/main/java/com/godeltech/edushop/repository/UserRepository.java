@@ -22,6 +22,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("Select u from User u where u.role.id != 1")
     List<User> findExceptAdmin();
 
+    @Query("Select u from User u where u.role.id != 1 AND u.active != true")
+    List<User> findDisabledExceptAdmin();
+
     @Query("Select count(*) from User u where u.role.id != 1")
     int findNumberOfUsersExceptAdmin();
 
