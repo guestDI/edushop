@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long>{
 
-    @Query("Select r from Role r where r.name != 'Administrator'")
+    @Query("Select r from Role r where r.name != 'Administrator' AND r.name != 'Premium_Buyer' ")
     public List<Role> findRolesForNewUsers();
 
     public Role findByName(String name);
