@@ -47,7 +47,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query("SELECT count(*) from Item i where i.supplier.id = :id")
     Long getItemsCount(@Param("id") Long supplierId);
 
-    @Query("SELECT count(*) from Item")
+    @Query("SELECT count(*) from Item i WHERE i.active = true")
     Long getCountOfAllItems();
 
     @Query("SELECT count(*) from Item i WHERE i.discount > 0")
