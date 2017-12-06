@@ -107,6 +107,8 @@ public class UserController {
         UserLoginDTO userLoginDTO = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
         if (userLoginDTO == null) {
             throw new RuntimeException("Not found");
+        } else if(!userLoginDTO.isActive()){
+            throw new RuntimeException("User is disabled");
         }
         loginInterceptor.register(userLoginDTO.getId(), userLoginDTO.getToken());
 
