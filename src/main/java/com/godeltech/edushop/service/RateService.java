@@ -28,8 +28,8 @@ public class RateService {
         return rateRepository.findFirst1ByOrderByDateRateDesc();
     }
 
-    public Rate saveCurrentRate(){
-        return rateRepository.save(rateConverter.convertRateItem(netClientGet.getRate()));
-    }
+//    public Rate saveCurrentRate(){
+//        return rateRepository.save(rateConverter.convertRateItem(netClientGet.getRate()));
+//    }
 
 }

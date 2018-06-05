@@ -186,7 +186,7 @@ public class DataLoader implements ApplicationRunner {
         itemRepository.save(item4);
         itemRepository.save(item5);
 
-        rateService.saveCurrentRate();
+//        rateService.saveCurrentRate();
     }
 
 }
